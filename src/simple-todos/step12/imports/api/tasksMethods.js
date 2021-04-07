@@ -52,4 +52,12 @@ Meteor.methods({
       },
     });
   },
+
+  'tasks.removeAll'() {
+    if (!this.userId) {
+      throw new Meteor.Error('Not authorized.');
+
+    }
+    TasksCollection.remove({ userId: this.userId });
+  },
 });

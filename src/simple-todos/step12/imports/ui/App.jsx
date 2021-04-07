@@ -44,11 +44,12 @@ export const App = () => {
     return { tasks, pendingTasksCount };
   });
 
-  const pendingTasksTitle = `${
-    pendingTasksCount ? ` (${pendingTasksCount})` : ''
-  }`;
+  const pendingTasksTitle = `${pendingTasksCount ? ` (${pendingTasksCount})` : ''
+    }`;
 
   const logout = () => Meteor.logout();
+
+  const removeAllTasks = () => Meteor.call('tasks.removeAll')
 
   return (
     <div className="app">
@@ -76,6 +77,8 @@ export const App = () => {
               <button onClick={() => setHideCompleted(!hideCompleted)}>
                 {hideCompleted ? 'Show All' : 'Hide Completed'}
               </button>
+
+              <button onClick={() => removeAllTasks()}>Delete All Tasks</button>
             </div>
 
             {isLoading && <div className="loading">loading...</div>}
